@@ -1,0 +1,157 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f3ec;
+  color: #0d3b2e;
+}
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background-color: #e6e3d7;
+  padding: 30px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sidebar .logo {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.sidebar .logo span {
+  color: #b29857;
+}
+
+.sidebar ul.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul.menu li {
+  padding: 10px 15px;
+  margin: 5px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar ul.menu li.active,
+.sidebar ul.menu li:hover {
+  background-color: #b29857;
+  color: white;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 30px;
+}
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px 0 0 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  background-color: #b29857;
+  color: white;
+  cursor: pointer;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid #b29857;
+  background-color: white;
+  color: #0d3b2e;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background-color: #b29857;
+  color: white;
+}
+
+/* Book List */
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.book-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+}
+
+.book-item button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Recommended Panel */
+.recommended {
+  width: 200px;
+  background-color: #1e3d2f;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.recommended-title {
+  background-color: #b29857;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.recommended img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.recommended-name {
+  text-align: center;
+  font-weight: bold;
+}

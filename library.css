@@ -1,0 +1,218 @@
+body{
+font-family: Arial, sans-serif;
+background:#F5F1E8;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.container{
+text-align:center;
+width:320px;
+}
+
+.welcome{
+font-style:italic;
+color:#0d3b2e;
+letter-spacing:2px;
+}
+
+.title{
+color:#0d3b2e;
+font-weight:bold;
+margin-bottom:30px;
+}
+
+.input-box{
+border:1px solid #0d3b2e;
+border-radius:25px;
+padding:12px;
+margin:15px 0;
+display:flex;
+align-items:center;
+}
+
+.input-box input{
+border:none;
+outline:none;
+width:100%;
+background:none;
+font-size:14px;
+}
+
+.password-box{
+position:relative;
+}
+
+.eye{
+cursor:pointer;
+}
+
+.forgot{
+color:#b38b59;
+text-align:left;
+font-size:14px;
+margin-bottom:20px;
+}
+
+.login-btn{
+background:#0d3b2e;
+color:#F5F1E8;
+border:none;
+padding:12px;
+width:100%;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+margin-bottom:20px;
+}
+
+.google-btn{
+background:#F5F1E8;
+border-radius:10px;
+padding:10px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+box-shadow:0 3px 8px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+.google-btn img{
+width:20px;
+}
+
+.signup{
+margin-top:20px;
+font-size:14px;
+color:#0d3b2e;
+}
+
+.join{
+color:#0d3b2e;
+margin-bottom:20px;
+}
+
+label{
+display:block;
+text-align:left;
+margin-bottom:5px;
+font-weight:bold;
+color:#0d3b2e;
+}
+
+.signin{
+margin-top:20px;
+color: #0d3b2e;
+}
+
+.signin a{
+color:#b38b59; /* Change this to your desired color */
+font-weight:bold;
+}
+
+.terms{
+margin-top:1px;
+font-size:13px;
+color:#0d3b2e;
+}
+
+.terms span{
+color:#b38b59;
+}
+.signup-link{
+color:#b38b59;
+}
+.signup-link:hover{
+color:#444F;
+}
+.signin-link{
+    color:#0d3b2e;
+}
+.signin-link:hover{
+    color:#444F;
+}
+/* Terms page container */
+.terms-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Scrollable terms box */
+.terms-box {
+  max-height: 400px;
+  overflow-y: scroll;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.terms-box h2 {
+  color: #34495e;
+  margin-top: 15px;
+}
+
+.terms-box p {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Checkbox container */
+.terms-agree {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.terms-agree input {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.agree-btn, .decline-btn {
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+.agree-btn {
+  background-color: #27ae60;
+}
+
+.agree-btn.hover {
+  background-color: #95a5a6;
+  pointer-events: none;
+}
+
+.agree-btn:hover:not(.disabled) {
+  background-color: #219150;
+}
+
+.decline-btn {
+  background-color: #c0392b;
+}
+
+.decline-btn:hover {
+  background-color: #992d22;
+}
