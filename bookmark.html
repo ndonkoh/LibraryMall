@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LibraryMall – Bookmarks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo-wrap">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4l4 8-4 8h-4l4-8z"/></svg>
+    </div>
+    <span class="logo-text">Library<span>Mall</span></span>
+  </div>
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="bmSearch" type="text" placeholder="Search bookmarks..."/>
+  </div>
+  <div class="topbar-right">
+    <div class="notif-btn">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <div class="notif-dot"></div>
+    </div>
+    <div class="avatar-btn">KA</div>
+  </div>
+</header>
+
+<div class="topline"></div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <a class="nav-item" href="homepage.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a class="nav-item" href="discover.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Discover
+    </a>
+    <a class="nav-item active" href="#">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Bookmark
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Settings
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Help
+    </a>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Tab bar -->
+    <div class="tab-bar">
+      <div class="tab active" onclick="switchBmTab('saved',this)">
+        Saved <span class="tab-badge" id="savedCount">12</span>
+      </div>
+      <div class="tab" onclick="switchBmTab('collections',this)">Collections</div>
+      <div class="tab" onclick="switchBmTab('finished',this)">
+        Finished <span class="tab-badge" id="finishedCount">5</span>
+      </div>
+    </div>
+
+    <div class="tab-panels">
+
+      <!-- ── SAVED ── -->
+      <div class="tab-panel active" id="panel-saved">
+        <div class="bm-toolbar">
+          <div class="bm-filter-chips" id="savedFilters">
+            <div class="bm-chip active" onclick="setFilter(this,'all')">All</div>
+            <div class="bm-chip" onclick="setFilter(this,'Fiction')">Fiction</div>
+            <div class="bm-chip" onclick="setFilter(this,'Business')">Business</div>
+            <div class="bm-chip" onclick="setFilter(this,'Self-Help')">Self-Help</div>
+            <div class="bm-chip" onclick="setFilter(this,'Philosophy')">Philosophy</div>
+            <div class="bm-chip" onclick="setFilter(this,'Biography')">Biography</div>
+          </div>
+          <div class="bm-view-toggle">
+            <button class="view-btn active" id="viewGrid" onclick="setView('grid',this)" title="Grid view">
+              <svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+            <button class="view-btn" id="viewList" onclick="setView('list',this)" title="List view">
+              <svg viewBox="0 0 24 24" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="bm-scroll" id="savedScroll">
+          <div class="bm-grid" id="savedGrid"></div>
+        </div>
+      </div>
+
+      <!-- ── COLLECTIONS ── -->
+      <div class="tab-panel" id="panel-collections">
+        <div class="bm-scroll" style="padding:22px 24px;">
+          <div class="coll-header-row">
+            <div class="coll-heading">My Collections</div>
+            <button class="btn-new-coll" onclick="showNewCollModal()">
+              <svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Collection
+            </button>
+          </div>
+          <div class="coll-grid" id="collGrid"></div>
+        </div>
+      </div>
+
+      <!-- ── FINISHED ── -->
+      <div class="tab-panel" id="panel-finished">
+        <div class="bm-scroll" id="finishedScroll" style="padding:22px 24px;">
+          <div class="finished-header">
+            <div class="finished-stat-row">
+              <div class="fin-stat">
+                <div class="fin-stat-num">5</div>
+                <div class="fin-stat-lbl">Books Completed</div>
+              </div>
+              <div class="fin-stat">
+                <div class="fin-stat-num">1,428</div>
+                <div class="fin-stat-lbl">Pages Read</div>
+              </div>
+              <div class="fin-stat">
+                <div class="fin-stat-num">4.6</div>
+                <div class="fin-stat-lbl">Avg. Rating Given</div>
+              </div>
+            </div>
+          </div>
+          <div class="finished-list" id="finishedList"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <!-- Reading Goal -->
+    <div class="rp-section">
+      <div class="rp-title">Reading Goal</div>
+      <div class="goal-ring-wrap">
+        <svg class="goal-ring" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="34" class="ring-bg"/>
+          <circle cx="40" cy="40" r="34" class="ring-fill" id="goalRing"/>
+        </svg>
+        <div class="goal-center">
+          <div class="goal-num">7</div>
+          <div class="goal-lbl">of 20</div>
+        </div>
+      </div>
+      <div class="goal-caption">7 books read this year · 13 to go</div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="rp-section">
+      <div class="rp-title">Recent Activity</div>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="act-dot saved"></div>
+          <div class="act-body">
+            <div class="act-text">Saved <strong>Dune</strong></div>
+            <div class="act-time">2 min ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot finished"></div>
+          <div class="act-body">
+            <div class="act-text">Finished <strong>Atomic Habits</strong></div>
+            <div class="act-time">Yesterday</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot saved"></div>
+          <div class="act-body">
+            <div class="act-text">Saved <strong>Zero to One</strong></div>
+            <div class="act-time">3 days ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot collection"></div>
+          <div class="act-body">
+            <div class="act-text">Added to <strong>Philosophy</strong> collection</div>
+            <div class="act-time">5 days ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="act-dot finished"></div>
+          <div class="act-body">
+            <div class="act-text">Finished <strong>Rich Dad Poor Dad</strong></div>
+            <div class="act-time">1 week ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Collections -->
+    <div class="rp-section">
+      <div class="rp-title">Quick Add to</div>
+      <div class="quick-coll-list">
+        <div class="quick-coll-item" onclick="quickAdd('Business Reads')">
+          <div class="qc-icon" style="background:rgba(92,48,32,.18);color:#5c3020;">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span>Business Reads</span>
+          <div class="qc-count">4</div>
+        </div>
+        <div class="quick-coll-item" onclick="quickAdd('Philosophy')">
+          <div class="qc-icon" style="background:rgba(80,48,128,.15);color:#503080;">
+            <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span>Philosophy</span>
+          <div class="qc-count">3</div>
+        </div>
+        <div class="quick-coll-item" onclick="quickAdd('Must Reads')">
+          <div class="qc-icon" style="background:rgba(201,168,76,.15);color:var(--dark);">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span>Must Reads</span>
+          <div class="qc-count">5</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /right-panel -->
+
+</div><!-- /layout -->
+
+<!-- NEW COLLECTION MODAL -->
+<div class="modal-overlay" id="newCollModal" onclick="hideModal(event)">
+  <div class="modal-box">
+    <div class="modal-title">New Collection</div>
+    <input class="modal-input" id="collNameInput" type="text" placeholder="Collection name…" maxlength="32"/>
+    <div class="modal-color-row">
+      <div class="mc" style="background:#2d4a7a" onclick="pickColor(this,'#2d4a7a')"></div>
+      <div class="mc" style="background:#a02040" onclick="pickColor(this,'#a02040')"></div>
+      <div class="mc" style="background:#2d7a60" onclick="pickColor(this,'#2d7a60')"></div>
+      <div class="mc" style="background:#6040a0" onclick="pickColor(this,'#6040a0')"></div>
+      <div class="mc active" style="background:#c9a84c" onclick="pickColor(this,'#c9a84c')"></div>
+      <div class="mc" style="background:#5c3020" onclick="pickColor(this,'#5c3020')"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="document.getElementById('newCollModal').classList.remove('open')">Cancel</button>
+      <button class="modal-create" onclick="createCollection()">Create</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const savedBooks = [
+  {id:1, title:"Game of Thrones", author:"George R.R. Martin", cover:"c1", genre:"Fiction", rating:4.9, pages:694, saved:"Mar 01"},
+  {id:2, title:"Rich Dad Poor Dad", author:"Robert Kiyosaki", cover:"c5", genre:"Business", rating:4.7, pages:336, saved:"Mar 05"},
+  {id:3, title:"How To Think Like Socrates", author:"Donald Robertson", cover:"c7", genre:"Philosophy", rating:4.5, pages:288, saved:"Mar 08"},
+  {id:4, title:"Zero to One", author:"Peter Thiel", cover:"c4", genre:"Business", rating:4.4, pages:224, saved:"Mar 10"},
+  {id:5, title:"Dune", author:"Frank Herbert", cover:"c11", genre:"Fiction", rating:4.9, pages:688, saved:"Mar 27"},
+  {id:6, title:"Man's Search for Meaning", author:"Viktor E. Frankl", cover:"c12", genre:"Philosophy", rating:4.9, pages:165, saved:"Feb 20"},
+  {id:7, title:"The Subtle Art", author:"Mark Manson", cover:"c2", genre:"Self-Help", rating:4.3, pages:224, saved:"Feb 14"},
+  {id:8, title:"Thinking Fast & Slow", author:"Daniel Kahneman", cover:"c1", genre:"Science", rating:4.5, pages:499, saved:"Feb 10"},
+  {id:9, title:"How to Win Friends", author:"Dale Carnegie", cover:"c6", genre:"Self-Help", rating:4.6, pages:291, saved:"Feb 03"},
+  {id:10, title:"1984", author:"George Orwell", cover:"c7", genre:"Fiction", rating:4.7, pages:328, saved:"Jan 28"},
+  {id:11, title:"Educated", author:"Tara Westover", cover:"c9", genre:"Biography", rating:4.8, pages:352, saved:"Jan 22"},
+  {id:12, title:"The Great Gatsby", author:"F. Scott Fitzgerald", cover:"c10", genre:"Fiction", rating:4.4, pages:180, saved:"Jan 15"},
+];
+
+const collections = [
+  {name:"Business Reads", color:"#5c3020", books:[savedBooks[1],savedBooks[3]], desc:"Finance & entrepreneurship"},
+  {name:"Philosophy", color:"#503080", books:[savedBooks[2],savedBooks[5]], desc:"Wisdom & deeper thinking"},
+  {name:"Must Reads", color:"#c9a84c", books:[savedBooks[0],savedBooks[4],savedBooks[6]], desc:"Essential reading list"},
+  {name:"Classics", color:"#2d4a7a", books:[savedBooks[9],savedBooks[11]], desc:"Timeless literary works"},
+];
+
+const finishedBooks = [
+  {id:1, title:"Atomic Habits", author:"James Clear", cover:"c3", genre:"Self-Help", myRating:5, finishedDate:"Mar 25, 2026", pages:320},
+  {id:2, title:"Rich Dad Poor Dad", author:"Robert Kiyosaki", cover:"c5", genre:"Business", myRating:4, finishedDate:"Mar 10, 2026", pages:336},
+  {id:3, title:"The Power of Now", author:"Eckhart Tolle", cover:"c5", genre:"Philosophy", myRating:5, finishedDate:"Feb 28, 2026", pages:236},
+  {id:4, title:"Think and Grow Rich", author:"Napoleon Hill", cover:"c6", genre:"Business", myRating:4, finishedDate:"Feb 12, 2026", pages:238},
+  {id:5, title:"Good Life Goals", author:"Matthew McConaughey", cover:"c2", genre:"Biography", myRating:4, finishedDate:"Jan 30, 2026", pages:298},
+];
+
+/* ── STATE ── */
+let currentView = 'grid';
+let currentFilter = 'all';
+let selectedColor = '#c9a84c';
+const removed = new Set();
+
+/* ── RENDER SAVED ── */
+function renderSaved(filter) {
+  const grid = document.getElementById('savedGrid');
+  grid.innerHTML = '';
+  let list = filter === 'all' ? savedBooks : savedBooks.filter(b => b.genre === filter);
+  list = list.filter(b => !removed.has(b.id));
+  // search
+  const q = document.getElementById('bmSearch').value.toLowerCase().trim();
+  if (q) list = list.filter(b => b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
+
+  document.getElementById('savedCount').textContent = savedBooks.filter(b=>!removed.has(b.id)).length;
+
+  if (list.length === 0) {
+    grid.innerHTML = `<div class="bm-empty"><svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg><p>No bookmarks here yet</p></div>`;
+    return;
+  }
+
+  if (currentView === 'grid') {
+    grid.classList.remove('bm-list-mode');
+    list.forEach((b, i) => {
+      const el = document.createElement('div');
+      el.className = 'bm-card';
+      el.style.animationDelay = (i * 0.05) + 's';
+      el.innerHTML = `
+        <div class="bm-cover ${b.cover}">
+          <div class="bm-ct">${b.title}</div>
+          <div class="bm-ca">${b.author}</div>
+          <button class="bm-remove-btn" onclick="removeBook(${b.id}, event)" title="Remove bookmark">
+            <svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="bm-info">
+          <div class="bm-title">${b.title}</div>
+          <div class="bm-author">${b.author}</div>
+          <div class="bm-meta-row">
+            <span class="bm-genre">${b.genre}</span>
+            <span class="bm-stars">${'★'.repeat(Math.floor(b.rating))}</span>
+          </div>
+          <div class="bm-saved-date">Saved ${b.saved}</div>
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+  } else {
+    grid.classList.add('bm-list-mode');
+    list.forEach((b, i) => {
+      const el = document.createElement('div');
+      el.className = 'bm-list-item';
+      el.style.animationDelay = (i * 0.04) + 's';
+      el.innerHTML = `
+        <div class="bm-list-cover ${b.cover}">${b.title}</div>
+        <div class="bm-list-body">
+          <div class="bm-list-title">${b.title}</div>
+          <div class="bm-list-author">${b.author}</div>
+          <div class="bm-meta-row" style="margin-top:5px;">
+            <span class="bm-genre">${b.genre}</span>
+            <span class="bm-stars" style="font-size:.7rem;">${'★'.repeat(Math.floor(b.rating))} ${b.rating}</span>
+            <span style="font-size:.7rem;color:var(--taupe-lt);">${b.pages}p</span>
+          </div>
+        </div>
+        <div class="bm-list-right">
+          <div class="bm-saved-date" style="margin-bottom:8px;">Saved ${b.saved}</div>
+          <button class="bm-read-btn">Read Now</button>
+          <button class="bm-rm-btn" onclick="removeBook(${b.id},event)">
+            <svg viewBox="0 0 24 24" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          </button>
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+  }
+}
+
+/* ── RENDER COLLECTIONS ── */
+function renderCollections() {
+  const g = document.getElementById('collGrid');
+  g.innerHTML = '';
+  collections.forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'coll-card';
+    el.style.animationDelay = (i * 0.08) + 's';
+    const preview = c.books.slice(0, 3);
+    el.innerHTML = `
+      <div class="coll-top" style="background:linear-gradient(135deg,${c.color}cc,${c.color}66)">
+        <div class="coll-preview-stack">
+          ${preview.map((b,j) => `<div class="coll-prev-spine ${b.cover}" style="transform:rotate(${(j-1)*8}deg);z-index:${j+1}"></div>`).join('')}
+        </div>
+        <div class="coll-badge">${c.books.length} book${c.books.length !== 1 ? 's' : ''}</div>
+      </div>
+      <div class="coll-info">
+        <div class="coll-name">${c.name}</div>
+        <div class="coll-desc">${c.desc}</div>
+      </div>
+    `;
+    g.appendChild(el);
+  });
+}
+
+/* ── RENDER FINISHED ── */
+function renderFinished() {
+  const list = document.getElementById('finishedList');
+  list.innerHTML = '';
+  finishedBooks.forEach((b, i) => {
+    const el = document.createElement('div');
+    el.className = 'fin-item';
+    el.style.animationDelay = (i * 0.07) + 's';
+    el.innerHTML = `
+      <div class="fin-cover ${b.cover}">${b.title}</div>
+      <div class="fin-body">
+        <div class="fin-title">${b.title}</div>
+        <div class="fin-author">${b.author}</div>
+        <div class="fin-genre-tag">${b.genre}</div>
+        <div class="fin-rating">
+          ${[1,2,3,4,5].map(s=>`<span class="fin-star ${s <= b.myRating ? 'on' : ''}">★</span>`).join('')}
+          <span class="fin-rating-lbl">My Rating</span>
+        </div>
+      </div>
+      <div class="fin-right">
+        <div class="fin-date">${b.finishedDate}</div>
+        <div class="fin-pages">${b.pages} pages</div>
+        <button class="fin-re-btn">Read Again</button>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+}
+
+/* ── ACTIONS ── */
+function removeBook(id, e) {
+  e.stopPropagation();
+  removed.add(id);
+  renderSaved(currentFilter);
+}
+
+function setFilter(el, filter) {
+  document.querySelectorAll('.bm-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = filter;
+  renderSaved(filter);
+}
+
+function setView(type, btn) {
+  currentView = type;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSaved(currentFilter);
+}
+
+function switchBmTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+function showNewCollModal() {
+  document.getElementById('newCollModal').classList.add('open');
+  setTimeout(() => document.getElementById('collNameInput').focus(), 100);
+}
+
+function hideModal(e) {
+  if (e.target === document.getElementById('newCollModal')) {
+    document.getElementById('newCollModal').classList.remove('open');
+  }
+}
+
+function pickColor(el, color) {
+  document.querySelectorAll('.mc').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  selectedColor = color;
+}
+
+function createCollection() {
+  const name = document.getElementById('collNameInput').value.trim();
+  if (!name) return;
+  collections.push({ name, color: selectedColor, books: [], desc: 'New collection' });
+  document.getElementById('collNameInput').value = '';
+  document.getElementById('newCollModal').classList.remove('open');
+  renderCollections();
+}
+
+function quickAdd(collName) {
+  const btn = event.currentTarget;
+  btn.classList.add('qc-flash');
+  setTimeout(() => btn.classList.remove('qc-flash'), 600);
+}
+
+/* ── GOAL RING ── */
+function animateGoalRing() {
+  const ring = document.getElementById('goalRing');
+  const r = 34;
+  const circ = 2 * Math.PI * r;
+  const pct = 7 / 20;
+  ring.style.strokeDasharray = circ;
+  ring.style.strokeDashoffset = circ;
+  setTimeout(() => { ring.style.strokeDashoffset = circ * (1 - pct); }, 400);
+}
+
+/* ── SEARCH ── */
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('bmSearch').addEventListener('input', () => renderSaved(currentFilter));
+});
+
+/* ── SIDEBAR NAV ── */
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', e => {
+    if (!item.getAttribute('href') || item.getAttribute('href') === '#') e.preventDefault();
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+/* ── INIT ── */
+renderSaved('all');
+renderCollections();
+renderFinished();
+animateGoalRing();
+</script>
+</body>
+</html>

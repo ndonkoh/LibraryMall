@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LibraryMall – Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo-wrap">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4l4 8-4 8h-4l4-8z"/></svg>
+    </div>
+    <span class="logo-text">Library<span>Mall</span></span>
+  </div>
+
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search books, authors..."/>
+  </div>
+
+  <div class="notif-btn">
+    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    <div class="notif-dot"></div>
+  </div>
+</header>
+
+<div class="topline"></div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <a class="nav-item active" href="homepage.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a class="nav-item" href="discover.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Discover
+    </a>
+    <a class="nav-item" href="bookmark.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Bookmark
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Settings
+    </a>
+    <a class="nav-item" href="#">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Help
+    </a>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Filter row -->
+    <div class="filter-row">
+      <div class="pills">
+        <div class="pill active" onclick="setPill(this)">Popular</div>
+        <div class="pill" onclick="setPill(this)">Top Selling</div>
+        <div class="pill" onclick="setPill(this)">Following</div>
+        <div class="pill" onclick="setPill(this)">New</div>
+      </div>
+      <div class="next-link">Next &rsaquo;</div>
+    </div>
+
+    <!--For the book grid so please change-->>
+    <div class="book-grid">
+      <div class="book-tile">
+        <div class="cover-block c1"><div class="ct">GAME OF THRONES</div><div class="ca">George R.R. Martin</div></div>
+        <div class="book-info"><div class="book-title">Game of Thrones</div><div class="book-author">George R.R. Martin</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c2"><div class="ct">MacGregor Brides</div><div class="ca">Nora Roberts</div></div>
+        <div class="book-info"><div class="book-title">MacGregor Brides</div><div class="book-author">Nora Roberts</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c3"><div class="ct">The Two-Income Trap</div><div class="ca">Elizabeth Warren</div></div>
+        <div class="book-info"><div class="book-title">Two Income Trap</div><div class="book-author">Elizabeth Warren &amp; Amelia Warren</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c4"><div class="ct">Mein Kampf</div><div class="ca">Adolf Hitler</div></div>
+        <div class="book-info"><div class="book-title">Mein Kampf</div><div class="book-author">Adolf Hitler</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c5"><div class="ct">RICH DAD POOR DAD</div><div class="ca">Robert Kiyosaki</div></div>
+        <div class="book-info"><div class="book-title">Rich Dad Poor Dad</div><div class="book-author">Robert Kiyosaki</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c6"><div class="ct">Think and Grow Rich</div><div class="ca">Napoleon Hill</div></div>
+        <div class="book-info"><div class="book-title">Think and Grow Rich</div><div class="book-author">Winnie Osei</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c7"><div class="ct">How To Think Like Socrates</div><div class="ca">Nora Roberts</div></div>
+        <div class="book-info"><div class="book-title">How To Think Like Socrates</div><div class="book-author">Nora Roberts</div></div>
+      </div>
+      <div class="book-tile">
+        <div class="cover-block c8"><div class="ct">Philosophy Book for Beginners</div><div class="ca">Sharon Kaye</div></div>
+        <div class="book-info"><div class="book-title">Philosophy book</div><div class="book-author">Sharon Kaye</div></div>
+      </div>
+    </div>
+
+  
+    <div class="section-heading">Currently Reading</div>
+    <div class="progress-list">
+
+      <div class="progress-item">
+        <div class="prog-cover-sq c3">Atomic Habits</div>
+        <div class="prog-body">
+          <div class="prog-title">Atomic Habits</div>
+          <div class="prog-author">James Clear</div>
+          <div class="prog-bar-wrap">
+            <span class="prog-pct">30% Complete</span>
+            <div class="prog-bg"><div class="prog-fill" data-pct="30" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="prog-cover-sq c2">Good Life Goo...</div>
+        <div class="prog-body">
+          <div class="prog-title">Good Life Goo...</div>
+          <div class="prog-author">Matthew McConaughey</div>
+          <div class="prog-bar-wrap">
+            <span class="prog-pct">10% Complete</span>
+            <div class="prog-bg"><div class="prog-fill" data-pct="10" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progress-item">
+        <div class="prog-cover-sq c5">The Power Of...</div>
+        <div class="prog-body">
+          <div class="prog-title">The Power Of ...</div>
+          <div class="prog-author">Eckhart Tolle</div>
+          <div class="prog-bar-wrap">
+            <span class="prog-pct">67% Complete</span>
+            <div class="prog-bg"><div class="prog-fill" data-pct="67" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    
+    <div class="continue-card">
+      <div class="cont-row">
+        <div class="cont-cover">Atomic Habits</div>
+        <div class="cont-meta">
+          <div class="cont-title">Atomic Habits</div>
+          <div class="cont-author">By James Clear</div>
+          <div class="cont-info">Page 45 of 320<br/>Opened: 05/03/2026</div>
+        </div>
+      </div>
+
+      <div class="cont-prog-wrap">
+        <div class="cont-prog-lbl">Reading Progress</div>
+        <div class="cont-prog-bg">
+          <div class="cont-prog-fill" data-pct="14" style="width:0%"></div>
+        </div>
+        <div class="cont-prog-pct">14% — Page 45 of 320</div>
+      </div>
+
+      <button class="cont-btn">
+        Continue Reading
+        <svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+
+    <!-- dots -->
+    <div class="dots">
+      <div class="dot on"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <!-- Trending Authors -->
+    <div class="trending-wrap">
+      <div class="trending-title">Trending Authors</div>
+      <div class="author-list">
+        <div class="author-item">
+          <div class="avatar" style="background:#3d5a3e">NR</div>
+          <span class="author-name">Nora Roberts</span>
+        </div>
+        <div class="author-item">
+          <div class="avatar" style="background:#5c3020">AC</div>
+          <span class="author-name">Agatha Christie</span>
+        </div>
+        <div class="author-item">
+          <div class="avatar" style="background:#1a2a4a">GR</div>
+          <span class="author-name">G. R.R Martin</span>
+        </div>
+        <div class="author-item">
+          <div class="avatar" style="background:#3a2060">BC</div>
+          <span class="author-name">Barbara Cart</span>
+        </div>
+        <div class="author-item">
+          <div class="avatar" style="background:#4a1a1a">JR</div>
+          <span class="author-name">J.K. Rowling</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /right-panel -->
+
+</div><!-- /layout -->
+
+<script>
+  // Pill switcher
+  function setPill(el) {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Animate all progress bars after load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('[data-pct]').forEach(bar => {
+        bar.style.width = bar.dataset.pct + '%';
+      });
+    }, 350);
+  });
+
+  // Sidebar nav
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
