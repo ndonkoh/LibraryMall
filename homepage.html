@@ -6,6 +6,8 @@
   <title>LibraryMall – Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css">
+  <script src="js/theme.js"></script>
+  <script src="js/notifications.js"></script>
 </head>
 <body>
 
@@ -23,10 +25,10 @@
     <input type="text" placeholder="Search books, authors..."/>
   </div>
 
-  <div class="notif-btn">
+  <button type="button" class="notif-btn" aria-label="Notifications" aria-expanded="false" aria-haspopup="dialog">
     <svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
     <div class="notif-dot"></div>
-  </div>
+  </button>
 </header>
 
 <div class="topline"></div>
@@ -47,11 +49,11 @@
       <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
       Bookmark
     </a>
-    <a class="nav-item" href="#">
+    <a class="nav-item" href="settings.html">
       <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
       Settings
     </a>
-    <a class="nav-item" href="#">
+    <a class="nav-item" href="help.html">
       <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       Help
     </a>
@@ -69,6 +71,12 @@
         <div class="pill" onclick="setPill(this)">New</div>
       </div>
       <div class="next-link">Next &rsaquo;</div>
+    </div>
+
+    <!-- Browse by Authors -->
+    <div style="margin: 40px 0 30px 0;">
+      <div style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #1a1a1a;">Browse by Authors</div>
+      <div data-authors-filter style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
     </div>
 
     <!--For the book grid so please change-->>
@@ -218,6 +226,82 @@
 </div><!-- /layout -->
 
 <script>
+  // Load user's reading progress from database
+  async function loadReadingProgress() {
+    try {
+      const user = getCurrentUser();
+      if (!user) return;
+
+      // Get user's orders/loans to show reading progress
+      const response = await apiCall('/orders/user/my-orders');
+      if (response.status && response.data) {
+        const orders = response.data.orders || [];
+        const progressList = document.querySelector('.progress-list');
+        const continueCard = document.querySelector('.continue-card');
+        
+        if (orders.length > 0) {
+          // Clear existing hardcoded content
+          progressList.innerHTML = '';
+          
+          // Display up to 3 recent books
+          orders.slice(0, 3).forEach((order, index) => {
+            const progress = Math.floor(Math.random() * 100); // Demo progress
+            const book = order.book || { bookname: 'Loading...', author: 'Loading...' };
+            
+            const progressItem = document.createElement('div');
+            progressItem.className = 'progress-item';
+            progressItem.innerHTML = `
+              <div class="prog-cover-sq c${(order.book_id % 12) + 1}">${book.bookname.substring(0, 12)}...</div>
+              <div class="prog-body">
+                <div class="prog-title">${book.bookname}</div>
+                <div class="prog-author">${book.author}</div>
+                <div class="prog-bar-wrap">
+                  <span class="prog-pct">${progress}% Complete</span>
+                  <div class="prog-bg"><div class="prog-fill" data-pct="${progress}" style="width:0%"></div></div>
+                </div>
+              </div>
+            `;
+            progressList.appendChild(progressItem);
+          });
+          
+          // Update continue reading card with first book
+          if (orders[0]) {
+            const firstOrder = orders[0];
+            const book = firstOrder.book || { bookname: 'Loading...', author: 'Loading...' };
+            const progress = Math.floor(Math.random() * 100);
+            
+            continueCard.innerHTML = `
+              <div class="cont-row">
+                <div class="cont-cover c${(firstOrder.book_id % 12) + 1}">${book.bookname}</div>
+                <div class="cont-meta">
+                  <div class="cont-title">${book.bookname}</div>
+                  <div class="cont-author">By ${book.author}</div>
+                  <div class="cont-info">Page ${Math.floor(progress * 3.2)} of 320<br/>Opened: ${new Date().toLocaleDateString()}</div>
+                </div>
+              </div>
+              <div class="cont-prog-wrap">
+                <div class="cont-prog-lbl">Reading Progress</div>
+                <div class="cont-prog-bg">
+                  <div class="cont-prog-fill" data-pct="${progress}" style="width:0%"></div>
+                </div>
+                <div class="cont-prog-pct">${progress}% — Page ${Math.floor(progress * 3.2)} of 320</div>
+              </div>
+              <button class="cont-btn">
+                Continue Reading
+                <svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            `;
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error loading reading progress:', error);
+    }
+  }
+
+  // Load reading progress when page loads
+  document.addEventListener('DOMContentLoaded', loadReadingProgress);
+
   // Pill switcher
   function setPill(el) {
     document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
@@ -239,8 +323,24 @@
       e.preventDefault();
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
       item.classList.add('active');
+      
+      // Navigate to the proper page
+      const href = item.getAttribute('href');
+      if (href && href !== '#') {
+        window.location.href = href;
+      }
     });
   });
+
+  // Continue Reading button
+  document.querySelector('.cont-btn')?.addEventListener('click', () => {
+    alert('Continue reading feature coming soon!');
+  });
+
 </script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/books.js"></script>
+<script src="js/orders.js"></script>
 </body>
 </html>

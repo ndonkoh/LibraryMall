@@ -1,0 +1,185 @@
+{
+  "books": [
+    {
+      "book_id": 1,
+      "bookname": "Atomic Habits",
+      "author": "James Clear",
+      "price": 16.99,
+      "category": "self_help",
+      "quantity": 15,
+      "date_added": "2024-01-15T10:00:00Z"
+    },
+    {
+      "book_id": 2,
+      "bookname": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "price": 12.99,
+      "category": "fantasy",
+      "quantity": 8,
+      "date_added": "2024-01-16T10:00:00Z"
+    },
+    {
+      "book_id": 3,
+      "bookname": "Dune",
+      "author": "Frank Herbert",
+      "price": 14.99,
+      "category": "scifi",
+      "quantity": 12,
+      "date_added": "2024-01-17T10:00:00Z"
+    },
+    {
+      "book_id": 4,
+      "bookname": "Rich Dad Poor Dad",
+      "author": "Robert Kiyosaki",
+      "price": 13.99,
+      "category": "business",
+      "quantity": 20,
+      "date_added": "2024-01-18T10:00:00Z"
+    },
+    {
+      "book_id": 5,
+      "bookname": "Think and Grow Rich",
+      "author": "Napoleon Hill",
+      "price": 11.99,
+      "category": "business",
+      "quantity": 18,
+      "date_added": "2024-01-19T10:00:00Z"
+    },
+    {
+      "book_id": 6,
+      "bookname": "The Power of Now",
+      "author": "Eckhart Tolle",
+      "price": 14.99,
+      "category": "self_help",
+      "quantity": 10,
+      "date_added": "2024-01-20T10:00:00Z"
+    },
+    {
+      "book_id": 7,
+      "bookname": "Fourth Wing",
+      "author": "Rebecca Yarros",
+      "price": 18.99,
+      "category": "fantasy",
+      "quantity": 6,
+      "date_added": "2024-01-21T10:00:00Z"
+    },
+    {
+      "book_id": 8,
+      "bookname": "A Game of Thrones",
+      "author": "George R.R. Martin",
+      "price": 15.99,
+      "category": "fantasy",
+      "quantity": 9,
+      "date_added": "2024-01-22T10:00:00Z"
+    },
+    {
+      "book_id": 9,
+      "bookname": "The Alchemist",
+      "author": "Paulo Coelho",
+      "price": 13.50,
+      "category": "romance",
+      "quantity": 14,
+      "date_added": "2024-01-23T10:00:00Z"
+    },
+    {
+      "book_id": 10,
+      "bookname": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "price": 17.99,
+      "category": "history",
+      "quantity": 11,
+      "date_added": "2024-01-24T10:00:00Z"
+    },
+    {
+      "book_id": 11,
+      "bookname": "1984",
+      "author": "George Orwell",
+      "price": 12.99,
+      "category": "scifi",
+      "quantity": 16,
+      "date_added": "2024-01-25T10:00:00Z"
+    },
+    {
+      "book_id": 12,
+      "bookname": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "price": 10.99,
+      "category": "romance",
+      "quantity": 13,
+      "date_added": "2024-01-26T10:00:00Z"
+    },
+    {
+      "book_id": 13,
+      "bookname": "Educated",
+      "author": "Tara Westover",
+      "price": 15.99,
+      "category": "history",
+      "quantity": 7,
+      "date_added": "2024-01-27T10:00:00Z"
+    },
+    {
+      "book_id": 14,
+      "bookname": "The Silent Patient",
+      "author": "Alex Michaelides",
+      "price": 14.99,
+      "category": "mystery",
+      "quantity": 9,
+      "date_added": "2024-01-28T10:00:00Z"
+    },
+    {
+      "book_id": 15,
+      "bookname": "The Girl with the Dragon Tattoo",
+      "author": "Stieg Larsson",
+      "price": 13.99,
+      "category": "mystery",
+      "quantity": 8,
+      "date_added": "2024-01-29T10:00:00Z"
+    },
+    {
+      "book_id": 16,
+      "bookname": "Zero to One",
+      "author": "Peter Thiel",
+      "price": 16.99,
+      "category": "business",
+      "quantity": 12,
+      "date_added": "2024-01-30T10:00:00Z"
+    },
+    {
+      "book_id": 17,
+      "bookname": "The Subtle Art of Not Giving a F*ck",
+      "author": "Mark Manson",
+      "price": 13.99,
+      "category": "self_help",
+      "quantity": 15,
+      "date_added": "2024-01-31T10:00:00Z"
+    },
+    {
+      "book_id": 18,
+      "bookname": "Project Hail Mary",
+      "author": "Andy Weir",
+      "price": 17.99,
+      "category": "scifi",
+      "quantity": 10,
+      "date_added": "2024-02-01T10:00:00Z"
+    },
+    {
+      "book_id": 19,
+      "bookname": "The Midnight Library",
+      "author": "Matt Haig",
+      "price": 14.99,
+      "category": "romance",
+      "quantity": 11,
+      "date_added": "2024-02-02T10:00:00Z"
+    },
+    {
+      "book_id": 20,
+      "bookname": "Klara and the Sun",
+      "author": "Kazuo Ishiguro",
+      "price": 15.99,
+      "category": "scifi",
+      "quantity": 6,
+      "date_added": "2024-02-03T10:00:00Z"
+    }
+  ],
+  "nextBookId": 21
+}

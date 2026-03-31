@@ -216,3 +216,58 @@ color:#444F;
 .decline-btn:hover {
   background-color: #992d22;
 }
+
+/* Dark mode — toggled from Settings; html class set by js/theme.js */
+html.dark-mode body {
+  background: #121a18;
+}
+html.dark-mode .welcome,
+html.dark-mode .title,
+html.dark-mode .join,
+html.dark-mode .signup,
+html.dark-mode label,
+html.dark-mode .signin,
+html.dark-mode .signin-link,
+html.dark-mode .terms {
+  color: #e8e8e8;
+}
+html.dark-mode .input-box {
+  border-color: #4a7c6a;
+  background: rgba(255, 255, 255, 0.05);
+}
+html.dark-mode .input-box input {
+  color: #f0f0f0;
+}
+html.dark-mode .forgot {
+  color: #d4a946;
+}
+html.dark-mode .login-btn {
+  background: #2d6a56;
+  color: #f5f1e8;
+}
+html.dark-mode .google-btn {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+html.dark-mode .signup-link,
+html.dark-mode .terms span {
+  color: #d4a946;
+}
+html.dark-mode .terms-container {
+  background: #1e2523;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+html.dark-mode .terms-box {
+  background: #252b28;
+  border-color: #3a4540;
+}
+html.dark-mode .terms-box h2 {
+  color: #c9d4cf;
+}
+html.dark-mode .terms-box p {
+  color: #b8c4bf;
+}
+html.dark-mode .terms-agree label {
+  color: #e8e8e8;
+}

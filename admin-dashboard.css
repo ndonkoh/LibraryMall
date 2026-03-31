@@ -280,3 +280,130 @@ main {
 @media (max-width: 480px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Admin Sections */
+.admin-section {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.admin-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sidebar navigation active state */
+.nav-item.active {
+  background: var(--green-mid);
+  color: white;
+  font-weight: 500;
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+
+/* Books Table */
+.books-table {
+  overflow-x: auto;
+}
+
+.books-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.books-table th,
+.books-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.books-table th {
+  background: var(--bg);
+  font-weight: 600;
+  color: var(--text);
+  position: sticky;
+  top: 0;
+}
+
+.books-table tbody tr:hover {
+  background: var(--bg);
+}
+
+/* Form styling */
+#newBookForm input,
+#newBookForm select,
+#editBookForm input,
+#editBookForm select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 14px;
+  background: var(--card);
+  color: var(--text);
+}
+
+#newBookForm input:focus,
+#newBookForm select:focus,
+#editBookForm input:focus,
+#editBookForm select:focus {
+  outline: none;
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 2px rgba(45, 106, 86, 0.1);
+}
+
+/* Form transitions */
+.section-card[style*="display: block"] {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode — html class set by js/theme.js */
+html.dark-mode {
+  --green-dark: #0f241f;
+  --green-mid: #2d6a56;
+  --green-light: #4caf82;
+  --accent: #d4a946;
+  --overdue: #ff6b6b;
+  --bg: #1a1f1d;
+  --card: #252b28;
+  --text: #e8e8e8;
+  --muted: #9aa8a3;
+  --border: #3a4540;
+  --shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+html.dark-mode .tab:hover:not(.active) {
+  background: #353d3a;
+  color: var(--text);
+}
+html.dark-mode .borrower-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+html.dark-mode .stat-card:nth-child(1) .icon { background: #1e3d2f; }
+html.dark-mode .stat-card:nth-child(2) .icon { background: #1a2a3a; }
+html.dark-mode .stat-card:nth-child(3) .icon { background: #3a3520; }
+html.dark-mode .stat-card:nth-child(4) .icon { background: #3a2220; }

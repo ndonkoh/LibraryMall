@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "userid": 1,
+      "username": "Admin",
+      "email": "admin@librarymall.com",
+      "password": "$2a$10$8K1p/a0dGl8pQjYQGQ8i9OaGQaOaGQaOaGQaOaGQaOaGQaOaGQaOaGQaOaGQaO",
+      "role": "admin"
+    },
+    {
+      "userid": 2,
+      "username": "John Smith",
+      "email": "john.smith@email.com",
+      "password": "$2a$10$R15mQ4hTQZjGGhKySY/I1OdsbWBeX907hlv0FgqAjouZWBmOP5M.e",
+      "role": "user"
+    },
+    {
+      "userid": 3,
+      "username": "Sarah Johnson",
+      "email": "sarah.j@email.com",
+      "password": "$2a$10$R15mQ4hTQZjGGhKySY/I1OdsbWBeX907hlv0FgqAjouZWBmOP5M.e",
+      "role": "user"
+    },
+    {
+      "userid": 4,
+      "username": "Mike Davis",
+      "email": "mike.davis@email.com",
+      "password": "$2a$10$R15mQ4hTQZjGGhKySY/I1OdsbWBeX907hlv0FgqAjouZWBmOP5M.e",
+      "role": "user"
+    },
+    {
+      "userid": 5,
+      "username": "Nancy",
+      "email": "ewurabanancy05@gmail.com",
+      "password": "$2a$10$fgzrCo3AYLj15JcP/JaOfeaWKDA0j86uGKe1RJCaGTzoCs0cjYS22",
+      "phone": null,
+      "role": "user",
+      "admin_request": "none",
+      "usercode": null
+    }
+  ],
+  "nextUserId": 6
+}

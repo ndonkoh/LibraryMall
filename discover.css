@@ -155,3 +155,47 @@ body {
   text-align: center;
   font-weight: bold;
 }
+
+/* Dark mode — html class set by js/theme.js */
+html.dark-mode body {
+  background-color: #1a1f1d;
+  color: #e8e8e8;
+}
+html.dark-mode .sidebar {
+  background-color: #1a2520;
+}
+html.dark-mode .sidebar ul.menu li {
+  color: #e0e0e0;
+}
+html.dark-mode .sidebar ul.menu li:hover,
+html.dark-mode .sidebar ul.menu li.active {
+  background-color: #2d6a56;
+  color: #fff;
+}
+html.dark-mode .main-content {
+  background: #1a1f1d;
+}
+html.dark-mode .search-bar input {
+  background: #252b28;
+  border-color: #3a4540;
+  color: #e8e8e8;
+}
+html.dark-mode .search-bar button {
+  background: #2d6a56;
+  border-color: #3a4540;
+  color: #fff;
+}
+html.dark-mode .filter-btn {
+  background: #252b28;
+  border-color: #b29857;
+  color: #e8e8e8;
+}
+html.dark-mode .book-item {
+  background: #252b28;
+  border: 1px solid #3a4540;
+  box-shadow: none;
+  color: #e8e8e8;
+}
+html.dark-mode .recommended {
+  background-color: #0f241f;
+}

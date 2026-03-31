@@ -1,0 +1,177 @@
+{
+  "orders": [
+    {
+      "order_id": 1,
+      "userid": 2,
+      "order_type": "buy",
+      "amount": 16.99,
+      "status": "completed",
+      "order_date": "2024-03-15T10:30:00Z",
+      "items": [
+        {
+          "book_id": 1,
+          "quantity": 1,
+          "price": 16.99,
+          "book": {
+            "book_id": 1,
+            "bookname": "Atomic Habits",
+            "author": "James Clear",
+            "price": 16.99,
+            "category": "self_help",
+            "quantity": 15,
+            "date_added": "2024-01-15T10:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "order_id": 2,
+      "userid": 2,
+      "order_type": "loan",
+      "amount": 0,
+      "status": "completed",
+      "order_date": "2024-03-18T14:20:00Z",
+      "items": [
+        {
+          "book_id": 3,
+          "quantity": 1,
+          "price": 14.99,
+          "book": {
+            "book_id": 3,
+            "bookname": "Dune",
+            "author": "Frank Herbert",
+            "price": 14.99,
+            "category": "scifi",
+            "quantity": 12,
+            "date_added": "2024-01-17T10:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "order_id": 3,
+      "userid": 3,
+      "order_type": "buy",
+      "amount": 27.98,
+      "status": "completed",
+      "order_date": "2024-03-20T09:15:00Z",
+      "items": [
+        {
+          "book_id": 4,
+          "quantity": 1,
+          "price": 13.99,
+          "book": {
+            "book_id": 4,
+            "bookname": "Rich Dad Poor Dad",
+            "author": "Robert Kiyosaki",
+            "price": 13.99,
+            "category": "business",
+            "quantity": 20,
+            "date_added": "2024-01-18T10:00:00Z"
+          }
+        },
+        {
+          "book_id": 5,
+          "quantity": 1,
+          "price": 13.99,
+          "book": {
+            "book_id": 5,
+            "bookname": "Think and Grow Rich",
+            "author": "Napoleon Hill",
+            "price": 13.99,
+            "category": "business",
+            "quantity": 18,
+            "date_added": "2024-01-19T10:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "order_id": 4,
+      "userid": 3,
+      "order_type": "loan",
+      "amount": 0,
+      "status": "pending",
+      "order_date": "2024-03-25T16:45:00Z",
+      "items": [
+        {
+          "book_id": 7,
+          "quantity": 1,
+          "price": 18.99,
+          "book": {
+            "book_id": 7,
+            "bookname": "Fourth Wing",
+            "author": "Rebecca Yarros",
+            "price": 18.99,
+            "category": "fantasy",
+            "quantity": 6,
+            "date_added": "2024-01-21T10:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "order_id": 5,
+      "userid": 4,
+      "order_type": "buy",
+      "amount": 15.99,
+      "status": "pending",
+      "order_date": "2024-03-28T11:30:00Z",
+      "items": [
+        {
+          "book_id": 8,
+          "quantity": 1,
+          "price": 15.99,
+          "book": {
+            "book_id": 8,
+            "bookname": "A Game of Thrones",
+            "author": "George R.R. Martin",
+            "price": 15.99,
+            "category": "fantasy",
+            "quantity": 9,
+            "date_added": "2024-01-22T10:00:00Z"
+          }
+        }
+      ]
+    },
+    {
+      "order_id": 6,
+      "userid": 4,
+      "order_type": "buy",
+      "amount": 31.98,
+      "status": "completed",
+      "order_date": "2024-03-22T13:10:00Z",
+      "items": [
+        {
+          "book_id": 6,
+          "quantity": 1,
+          "price": 14.99,
+          "book": {
+            "book_id": 6,
+            "bookname": "The Power of Now",
+            "author": "Eckhart Tolle",
+            "price": 14.99,
+            "category": "self_help",
+            "quantity": 10,
+            "date_added": "2024-01-20T10:00:00Z"
+          }
+        },
+        {
+          "book_id": 9,
+          "quantity": 1,
+          "price": 13.50,
+          "book": {
+            "book_id": 9,
+            "bookname": "The Alchemist",
+            "author": "Paulo Coelho",
+            "price": 13.50,
+            "category": "romance",
+            "quantity": 14,
+            "date_added": "2024-01-23T10:00:00Z"
+          }
+        }
+      ]
+    }
+  ],
+  "nextOrderId": 7
+}

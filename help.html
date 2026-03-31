@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LibraryMall – Help</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/theme.js"></script>
+  <script src="js/notifications.js"></script>
+  <style>
+    .help-page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 36px 48px 60px;
+    }
+    .help-page h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0 0 8px 0;
+    }
+    .help-lead {
+      color: var(--taupe);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .help-search-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .help-search-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      stroke: var(--taupe);
+      fill: none;
+      stroke-width: 2;
+      pointer-events: none;
+    }
+    .help-search {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 14px 12px 44px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      background: var(--bg-card);
+      color: var(--dark);
+      outline: none;
+    }
+    .help-search:focus {
+      border-color: var(--gold);
+    }
+    .help-search::placeholder {
+      color: var(--taupe);
+    }
+    .help-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .help-chip {
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--taupe);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .help-chip:hover {
+      border-color: var(--gold);
+      color: var(--dark);
+    }
+    .help-chip.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--dark);
+      font-weight: 600;
+    }
+    .help-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin: 28px 0 12px;
+    }
+    .help-faq-list {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .help-faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .help-faq-item:last-child {
+      border-bottom: none;
+    }
+    .help-faq-item.hidden {
+      display: none;
+    }
+    .help-faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      text-align: left;
+      border: none;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    .help-faq-q:hover {
+      background: rgba(201, 168, 76, 0.08);
+    }
+    .help-faq-chev {
+      flex-shrink: 0;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--taupe);
+      border-bottom: 2px solid var(--taupe);
+      transform: rotate(45deg);
+      transition: transform .2s;
+      margin-top: -4px;
+    }
+    .help-faq-item.open .help-faq-chev {
+      transform: rotate(-135deg);
+      margin-top: 4px;
+    }
+    .help-faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .28s ease;
+    }
+    .help-faq-item.open .help-faq-a {
+      max-height: 320px;
+    }
+    .help-faq-a-inner {
+      padding: 0 18px 18px;
+      font-size: 0.88rem;
+      color: var(--taupe);
+      line-height: 1.65;
+    }
+    .help-empty {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--taupe);
+      font-size: 0.9rem;
+      display: none;
+    }
+    .help-empty.visible {
+      display: block;
+    }
+    .help-contact {
+      margin-top: 36px;
+      padding: 22px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+    }
+    .help-contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0 0 8px 0;
+    }
+    .help-contact p {
+      font-size: 0.86rem;
+      color: var(--taupe);
+      margin: 0 0 14px 0;
+      line-height: 1.5;
+    }
+    .help-contact label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .help-contact textarea {
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      background: var(--bg);
+      color: var(--dark);
+      resize: vertical;
+      margin-bottom: 12px;
+    }
+    .help-contact textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .help-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .help-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: background .2s, filter .2s;
+    }
+    .help-btn-primary {
+      background: var(--forest);
+      color: var(--bg-card);
+    }
+    .help-btn-primary:hover {
+      filter: brightness(1.08);
+    }
+    .help-btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+    }
+    .help-btn-outline:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+    .help-links {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .help-links a {
+      font-size: 0.85rem;
+      color: var(--forest);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .help-links a:hover {
+      text-decoration: underline;
+    }
+    html.dark-mode .help-faq-q:hover {
+      background: rgba(212, 169, 70, 0.12);
+    }
+    @media (max-width: 768px) {
+      .help-page { padding: 24px 20px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo-wrap">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4l4 8-4 8h-4l4-8z"/></svg>
+    </div>
+    <span class="logo-text">Library<span>Mall</span></span>
+  </div>
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search books, authors..."/>
+  </div>
+  <button type="button" class="notif-btn" aria-label="Notifications" aria-expanded="false" aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    <div class="notif-dot"></div>
+  </button>
+</header>
+
+<div class="topline"></div>
+
+<div class="layout">
+  <aside>
+    <a class="nav-item" href="homepage.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a class="nav-item" href="discover.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Discover
+    </a>
+    <a class="nav-item" href="bookmark.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Bookmark
+    </a>
+    <a class="nav-item" href="settings.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Settings
+    </a>
+    <a class="nav-item active" href="help.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Help
+    </a>
+  </aside>
+
+  <main style="flex:1; padding:0;">
+    <div class="help-page">
+      <h1>Help center</h1>
+      <p class="help-lead">Search answers, browse by topic, or send us a message. Your question may already be answered below.</p>
+
+      <div class="help-search-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" class="help-search" id="helpSearch" placeholder="Search help articles…" autocomplete="off"/>
+      </div>
+
+      <div class="help-chips" id="helpChips" role="tablist" aria-label="Topics">
+        <button type="button" class="help-chip active" data-cat="all" role="tab" aria-selected="true">All topics</button>
+        <button type="button" class="help-chip" data-cat="account" role="tab" aria-selected="false">Account</button>
+        <button type="button" class="help-chip" data-cat="books" role="tab" aria-selected="false">Books</button>
+        <button type="button" class="help-chip" data-cat="bookmarks" role="tab" aria-selected="false">Bookmarks</button>
+        <button type="button" class="help-chip" data-cat="orders" role="tab" aria-selected="false">Orders</button>
+        <button type="button" class="help-chip" data-cat="app" role="tab" aria-selected="false">App &amp; settings</button>
+      </div>
+
+      <div class="help-section-title">Frequently asked questions</div>
+      <div class="help-faq-list" id="helpFaqList">
+        <div class="help-faq-item" data-category="books" data-text="borrow book library days return">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            How do I borrow a book?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">Open a book’s details from Discover or Home, then use <strong>Borrow</strong> if it is available. Loan periods and renewals follow your library’s rules (typically shown on the book page). Return or renew from your active loans when that feature is linked to your account.</div>
+          </div>
+        </div>
+        <div class="help-faq-item" data-category="orders" data-text="buy purchase cart checkout payment">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            Can I purchase books?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">Yes. Add items to your cart from book pages, then complete checkout from the cart flow. You’ll see confirmation and order history where orders are enabled for your account.</div>
+          </div>
+        </div>
+        <div class="help-faq-item" data-category="bookmarks" data-text="collections organize saved">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            How do I organize saved books?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">Go to <strong>Bookmarks</strong>. Use tabs for Saved, Collections, and Finished. Create collections to group titles, and use the search box to filter your saved list.</div>
+          </div>
+        </div>
+        <div class="help-faq-item" data-category="account" data-text="profile email password login">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            How do I update my profile or password?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">Open <strong>Settings</strong>. Edit your profile name and email under Account, and use <strong>Change Password</strong> when you want to update your login password.</div>
+          </div>
+        </div>
+        <div class="help-faq-item" data-category="app" data-text="dark mode theme night display">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            How does dark mode work?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">In <strong>Settings</strong>, turn on the dark mode toggle. Your choice is saved on this device and applies across LibraryMall screens (Home, Discover, Bookmarks, Help, and more).</div>
+          </div>
+        </div>
+        <div class="help-faq-item" data-category="app" data-text="notifications alerts">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            Where are my notifications?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">Click the bell in the top bar to open a notifications panel. You can mark items as read, clear them, or jump to a related page. Email alerts are optional if you enable them in settings.</div>
+          </div>
+        </div>
+        <div class="help-faq-item" data-category="orders" data-text="secure payment card safety">
+          <button type="button" class="help-faq-q" aria-expanded="false">
+            Is my payment information secure?
+            <span class="help-faq-chev" aria-hidden="true"></span>
+          </button>
+          <div class="help-faq-a">
+            <div class="help-faq-a-inner">Checkout uses standard secure practices. Never share your password or card details in the contact form below—use the official payment screens only.</div>
+          </div>
+        </div>
+      </div>
+      <p class="help-empty" id="helpEmpty">No articles match your search or filter. Try another keyword or choose “All topics”.</p>
+
+      <div class="help-contact">
+        <h2>Still need help?</h2>
+        <p>Describe your issue and we’ll keep it with your support history on this device. For account-specific help, you can also open Contact Support from Settings.</p>
+        <label for="helpMessage">Your message</label>
+        <textarea id="helpMessage" placeholder="What happened? What were you trying to do?"></textarea>
+        <div class="help-actions">
+          <button type="button" class="help-btn help-btn-primary" id="helpSubmit">Send message</button>
+          <button type="button" class="help-btn help-btn-outline" id="helpEmail">Copy support email</button>
+        </div>
+      </div>
+
+      <div class="help-links">
+        <a href="settings.html">Settings</a>
+        <a href="discover.html">Discover</a>
+        <a href="bookmark.html">Bookmarks</a>
+        <a href="homepage.html">Home</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var SUPPORT_EMAIL = 'support@librarymall.app';
+  var items = Array.prototype.slice.call(document.querySelectorAll('.help-faq-item'));
+  var searchEl = document.getElementById('helpSearch');
+  var emptyEl = document.getElementById('helpEmpty');
+  var cat = 'all';
+
+  function norm(s) {
+    return (s || '').toLowerCase().trim();
+  }
+
+  function applyFilters() {
+    var q = norm(searchEl.value);
+    var n = 0;
+    items.forEach(function (el) {
+      var category = el.getAttribute('data-category') || '';
+      var blob = norm(el.getAttribute('data-text')) + ' ' + norm(el.textContent);
+      var okCat = cat === 'all' || category === cat;
+      var okQ = !q || blob.indexOf(q) !== -1;
+      var show = okCat && okQ;
+      el.classList.toggle('hidden', !show);
+      if (show) n++;
+    });
+    emptyEl.classList.toggle('visible', n === 0);
+  }
+
+  document.getElementById('helpChips').addEventListener('click', function (e) {
+    var btn = e.target.closest('.help-chip');
+    if (!btn) return;
+    cat = btn.getAttribute('data-cat') || 'all';
+    document.querySelectorAll('.help-chip').forEach(function (c) {
+      c.classList.toggle('active', c === btn);
+      c.setAttribute('aria-selected', c === btn ? 'true' : 'false');
+    });
+    applyFilters();
+  });
+
+  var searchTimer;
+  searchEl.addEventListener('input', function () {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(applyFilters, 200);
+  });
+
+  document.getElementById('helpFaqList').addEventListener('click', function (e) {
+    var qBtn = e.target.closest('.help-faq-q');
+    if (!qBtn) return;
+    var item = qBtn.closest('.help-faq-item');
+    var open = !item.classList.contains('open');
+    items.forEach(function (el) {
+      if (el !== item) {
+        el.classList.remove('open');
+        var b = el.querySelector('.help-faq-q');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+    item.classList.toggle('open', open);
+    qBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.getElementById('helpSubmit').addEventListener('click', function () {
+    var text = document.getElementById('helpMessage').value.trim();
+    if (!text) {
+      if (typeof showToast === 'function') showToast('Please enter a message.', 'error');
+      else alert('Please enter a message.');
+      return;
+    }
+    try {
+      var key = 'librarymall_help_requests';
+      var list = JSON.parse(localStorage.getItem(key) || '[]');
+      list.push({ at: new Date().toISOString(), message: text });
+      localStorage.setItem(key, JSON.stringify(list));
+    } catch (err) {}
+    document.getElementById('helpMessage').value = '';
+    if (typeof showToast === 'function') showToast('Thanks! Your message was saved locally.', 'success');
+    else alert('Thanks! Your message was saved locally.');
+  });
+
+  document.getElementById('helpEmail').addEventListener('click', function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(SUPPORT_EMAIL).then(function () {
+        if (typeof showToast === 'function') showToast('Email copied to clipboard', 'success');
+        else alert('Copied: ' + SUPPORT_EMAIL);
+      }).catch(function () {
+        prompt('Support email:', SUPPORT_EMAIL);
+      });
+    } else {
+      prompt('Support email:', SUPPORT_EMAIL);
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      searchEl.value = '';
+      applyFilters();
+    }
+  });
+
+  function prefillFromQuery() {
+    var params = new URLSearchParams(window.location.search);
+    var topic = norm(params.get('topic'));
+    var q = params.get('q');
+    if (q) searchEl.value = q;
+    var topicMap = { borrow: 'books', buy: 'orders', account: 'account', bookmark: 'bookmarks', dark: 'app' };
+    if (topic && topicMap[topic]) {
+      cat = topicMap[topic];
+      document.querySelectorAll('.help-chip').forEach(function (c) {
+        var is = c.getAttribute('data-cat') === cat;
+        c.classList.toggle('active', is);
+        c.setAttribute('aria-selected', is ? 'true' : 'false');
+      });
+    }
+    applyFilters();
+  }
+
+  prefillFromQuery();
+})();
+
+</script>
+<script src="js/api.js"></script>
+</body>
+</html>

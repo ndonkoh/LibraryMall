@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LibraryMall – Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
+  <script src="js/theme.js"></script>
+  <script src="js/notifications.js"></script>
+  <style>
+    /* Settings Page Specific Styles */
+    .settings-container {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 40px 60px;
+    }
+
+    .settings-header {
+      margin-bottom: 40px;
+    }
+
+    .settings-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0 0 10px 0;
+    }
+
+    .settings-header p {
+      color: var(--taupe);
+      font-size: 0.95rem;
+    }
+
+    /* Settings Sections */
+    .settings-section {
+      margin-bottom: 50px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 40px;
+    }
+
+    .settings-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold);
+      border-radius: 8px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    /* Settings Items */
+    .settings-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-light);
+      gap: 20px;
+    }
+
+    .settings-item:last-child {
+      border-bottom: none;
+    }
+
+    .settings-item-content {
+      flex: 1;
+    }
+
+    .settings-item-label {
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .settings-item-desc {
+      font-size: 0.85rem;
+      color: var(--taupe);
+    }
+
+    .settings-item-action {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Buttons */
+    .btn-settings {
+      padding: 10px 20px;
+      border: 1.5px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-settings:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-danger {
+      border-color: #e94560;
+      color: #e94560;
+    }
+
+    .btn-danger:hover {
+      background: #e94560;
+      color: white;
+    }
+
+    .toggle-switch {
+      width: 54px;
+      height: 28px;
+      background: var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .toggle-switch.active {
+      background: var(--gold);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: left 0.3s;
+    }
+
+    .toggle-switch.active::after {
+      left: 28px;
+    }
+
+    /* Logout Button */
+    .btn-logout {
+      padding: 12px 40px;
+      background: #e94560;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .btn-logout:hover {
+      background: #d63859;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 14px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-header {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 25px;
+    }
+
+    .modal-body {
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .btn-modal {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-modal-cancel {
+      background: var(--bg-card);
+      color: var(--taupe);
+    }
+
+    .btn-modal-cancel:hover {
+      background: var(--border);
+    }
+
+    .btn-modal-confirm {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-modal-confirm:hover {
+      background: #d4a946;
+    }
+
+    .btn-modal-danger {
+      background: #e94560;
+      color: white;
+    }
+
+    .btn-modal-danger:hover {
+      background: #d63859;
+    }
+
+    .alert-message {
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    /* Dark Mode Styles */
+    html.dark-mode {
+      --bg: #1a1a1a;
+      --bg-card: #252525;
+      --dark: #f0f0f0;
+      --taupe: #b0b0b0;
+      --border: #404040;
+      --border-light: #333333;
+      --gold: #d4a946;
+      --forest: #2a5a4a;
+      --sidebar: #1f1f1f;
+    }
+
+    html.dark-mode body {
+      background: var(--bg);
+      color: var(--dark);
+    }
+
+    html.dark-mode header,
+    html.dark-mode .topbar {
+      background: var(--bg-card);
+      border-bottom-color: var(--border);
+    }
+
+    html.dark-mode aside {
+      background: var(--sidebar);
+      border-right-color: var(--border);
+    }
+
+    html.dark-mode main {
+      background: var(--bg);
+    }
+
+    html.dark-mode .settings-container {
+      background: var(--bg);
+    }
+
+    html.dark-mode .settings-header h1 {
+      color: var(--dark);
+    }
+
+    html.dark-mode .settings-header p {
+      color: var(--taupe);
+    }
+
+    html.dark-mode .section-title {
+      color: var(--dark);
+    }
+
+    html.dark-mode .section-icon {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    html.dark-mode .settings-item {
+      border-bottom-color: var(--border);
+    }
+
+    html.dark-mode .settings-item-label {
+      color: var(--dark);
+    }
+
+    html.dark-mode .settings-item-desc {
+      color: var(--taupe);
+    }
+
+    html.dark-mode .btn-settings {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    html.dark-mode .btn-settings:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    html.dark-mode .toggle-switch {
+      background: var(--border);
+    }
+
+    html.dark-mode .toggle-switch.active {
+      background: var(--gold);
+    }
+
+    html.dark-mode .toggle-switch::after {
+      background: var(--bg-card);
+    }
+
+    html.dark-mode .modal-content {
+      background: var(--bg-card);
+      color: var(--dark);
+    }
+
+    html.dark-mode .modal-header {
+      color: var(--dark);
+    }
+
+    html.dark-mode .form-label {
+      color: var(--dark);
+    }
+
+    html.dark-mode .form-input {
+      background: var(--bg);
+      color: var(--dark);
+      border-color: var(--border);
+    }
+
+    html.dark-mode .form-input:focus {
+      border-color: var(--gold);
+    }
+
+    html.dark-mode .btn-modal-cancel {
+      background: var(--border);
+      color: var(--taupe);
+    }
+
+    html.dark-mode .btn-modal-cancel:hover {
+      background: var(--bg);
+      color: var(--dark);
+    }
+
+    html.dark-mode .btn-modal-confirm {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    html.dark-mode .search-bar input {
+      background: var(--bg);
+      color: var(--dark);
+      border-color: var(--border);
+    }
+
+    html.dark-mode .search-bar input::placeholder {
+      color: var(--taupe);
+    }
+
+    html.dark-mode .notif-btn svg {
+      stroke: var(--taupe);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .settings-container {
+        padding: 30px 20px;
+        max-width: 100%;
+      }
+
+      .settings-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .settings-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .settings-item-action {
+        margin-top: 15px;
+      }
+
+      .btn-settings {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo-wrap">
+    <div class="logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M4 4h4v16H4zM10 4h4l4 8-4 8h-4l4-8z"/></svg>
+    </div>
+    <span class="logo-text">Library<span>Mall</span></span>
+  </div>
+
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Search books, authors..."/>
+  </div>
+
+  <button type="button" class="notif-btn" aria-label="Notifications" aria-expanded="false" aria-haspopup="dialog">
+    <svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    <div class="notif-dot"></div>
+  </button>
+</header>
+
+<div class="topline"></div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <a class="nav-item" href="homepage.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a class="nav-item" href="discover.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Discover
+    </a>
+    <a class="nav-item" href="bookmark.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      Bookmark
+    </a>
+    <a class="nav-item active" href="settings.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Settings
+    </a>
+    <a class="nav-item" href="help.html">
+      <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Help
+    </a>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main style="flex: 1; padding: 0;">
+    
+    <div class="settings-container">
+
+      <!-- Header -->
+      <div class="settings-header">
+        <h1>Settings</h1>
+        <p>Manage your account, preferences, and more</p>
+      </div>
+
+      <!-- ACCOUNT SECTION -->
+      <div class="settings-section">
+        <div class="section-title">
+          <div class="section-icon">👤</div>
+          Account
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Profile Name</div>
+            <div class="settings-item-desc" id="currentName">Loading...</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings" onclick="openEditProfileModal()">Edit</button>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Password</div>
+            <div class="settings-item-desc">Change your account password</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings" onclick="openChangePasswordModal()">Change</button>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Delete Account</div>
+            <div class="settings-item-desc">Permanently delete your account and all data</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings btn-danger" onclick="openDeleteAccountModal()">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPEARANCE SECTION -->
+      <div class="settings-section">
+        <div class="section-title">
+          <div class="section-icon">🎨</div>
+          Appearance
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Dark Mode</div>
+            <div class="settings-item-desc">Enable dark theme for comfortable night reading</div>
+          </div>
+          <div class="settings-item-action">
+            <div class="toggle-switch" id="darkModeToggle" onclick="toggleDarkMode()"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GENERAL SECTION -->
+      <div class="settings-section">
+        <div class="section-title">
+          <div class="section-icon">⚙️</div>
+          General
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">App Version</div>
+            <div class="settings-item-desc" id="appVersion">v1.0.0</div>
+          </div>
+          <div class="settings-item-action">
+            <span style="color: var(--taupe); font-size: 0.9rem;">Latest</span>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Clear Cache & Storage</div>
+            <div class="settings-item-desc">Remove cached data and local storage</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings" onclick="openClearCacheModal()">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUPPORT SECTION -->
+      <div class="settings-section">
+        <div class="section-title">
+          <div class="section-icon">💬</div>
+          Support
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Help & FAQ</div>
+            <div class="settings-item-desc">Search topics, FAQs, and quick links</div>
+          </div>
+          <div class="settings-item-action">
+            <button type="button" class="btn-settings" onclick="window.location.href='help.html'">Open</button>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Contact Support</div>
+            <div class="settings-item-desc">Send feedback or report issues</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings" onclick="openFeedbackModal()">Contact</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEGAL SECTION -->
+      <div class="settings-section">
+        <div class="section-title">
+          <div class="section-icon">⚖️</div>
+          Legal
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Terms of Service</div>
+            <div class="settings-item-desc">Read our terms and conditions</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings" onclick="openTermsModal()">Read</button>
+          </div>
+        </div>
+
+        <div class="settings-item">
+          <div class="settings-item-content">
+            <div class="settings-item-label">Privacy Policy</div>
+            <div class="settings-item-desc">Learn how we protect your data</div>
+          </div>
+          <div class="settings-item-action">
+            <button class="btn-settings" onclick="openPrivacyModal()">Read</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGOUT BUTTON -->
+      <button class="btn-logout" onclick="logout()">Logout</button>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- MODALS -->
+
+<!-- Edit Profile Modal -->
+<div class="modal" id="editProfileModal">
+  <div class="modal-content">
+    <div class="modal-header">Edit Profile</div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" id="profileName" placeholder="Enter your name"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('editProfileModal')">Cancel</button>
+      <button class="btn-modal btn-modal-confirm" onclick="saveProfile()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal" id="changePasswordModal">
+  <div class="modal-content">
+    <div class="modal-header">Change Password</div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Current Password</label>
+        <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">New Password</label>
+        <input type="password" class="form-input" id="newPassword" placeholder="Enter new password"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('changePasswordModal')">Cancel</button>
+      <button class="btn-modal btn-modal-confirm" onclick="savePassword()">Change Password</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal" id="deleteAccountModal">
+  <div class="modal-content">
+    <div class="modal-header" style="color: #e94560;">Delete Account</div>
+    <div class="modal-body">
+      <div style="color: #721c24; background: #f8d7da; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #f5c6cb;">
+        ⚠️ This action cannot be undone. All your data will be permanently deleted.
+      </div>
+      <div class="form-group">
+        <label class="form-label">Type "DELETE" to confirm</label>
+        <input type="text" class="form-input" id="deleteConfirm" placeholder="Type DELETE"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('deleteAccountModal')">Cancel</button>
+      <button class="btn-modal btn-modal-danger" onclick="deleteAccount()">Delete Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- Clear Cache Modal -->
+<div class="modal" id="clearCacheModal">
+  <div class="modal-content">
+    <div class="modal-header">Clear Cache & Storage</div>
+    <div class="modal-body">
+      <div class="alert-message alert-success">
+        ✓ Clearing cache will remove downloaded books and temporary files.
+      </div>
+      <p style="color: var(--taupe);">This will not affect your account data or preferences. Are you sure?</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('clearCacheModal')">Cancel</button>
+      <button class="btn-modal btn-modal-confirm" onclick="clearCache()">Clear Cache</button>
+    </div>
+  </div>
+</div>
+
+<!-- Feedback Modal -->
+<div class="modal" id="feedbackModal">
+  <div class="modal-content">
+    <div class="modal-header">Contact Support</div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <input type="text" class="form-input" id="feedbackSubject" placeholder="What is this about?"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-input" id="feedbackMessage" placeholder="Tell us your feedback or report an issue..." style="height: 150px; resize: none;"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('feedbackModal')">Cancel</button>
+      <button class="btn-modal btn-modal-confirm" onclick="submitFeedback()">Send Feedback</button>
+    </div>
+  </div>
+</div>
+
+<!-- Terms Modal -->
+<div class="modal" id="termsModal">
+  <div class="modal-content">
+    <div class="modal-header">Terms of Service</div>
+    <div class="modal-body" style="max-height: 400px; overflow-y: auto; font-size: 0.9rem; color: var(--taupe); line-height: 1.6;">
+      <h4 style="color: var(--dark);">1. Acceptance of Terms</h4>
+      <p>By accessing and using LibraryMall, you accept and agree to be bound by the terms and provision of this agreement.</p>
+
+      <h4 style="color: var(--dark);">2. Use License</h4>
+      <p>Permission is granted to temporarily download one copy of the materials for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>
+
+      <h4 style="color: var(--dark);">3. Disclaimer</h4>
+      <p>The materials on LibraryMall are provided on an 'as is' basis. LibraryMall makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+
+      <h4 style="color: var(--dark);">4. Limitations</h4>
+      <p>In no event shall LibraryMall or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on LibraryMall.</p>
+
+      <h4 style="color: var(--dark);">5. Modifications</h4>
+      <p>LibraryMall may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('termsModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Privacy Modal -->
+<div class="modal" id="privacyModal">
+  <div class="modal-content">
+    <div class="modal-header">Privacy Policy</div>
+    <div class="modal-body" style="max-height: 400px; overflow-y: auto; font-size: 0.9rem; color: var(--taupe); line-height: 1.6;">
+      <h4 style="color: var(--dark);">1. Information We Collect</h4>
+      <p>We collect information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.</p>
+
+      <h4 style="color: var(--dark);">2. How We Use Information</h4>
+      <p>We use the information we collect to provide, maintain, and improve our services, process transactions, send transactional and promotional communications, and comply with legal obligations.</p>
+
+      <h4 style="color: var(--dark);">3. Data Security</h4>
+      <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+
+      <h4 style="color: var(--dark);">4. Cookies</h4>
+      <p>We use cookies and similar tracking technologies to track activity on our website and hold certain information to better serve you.</p>
+
+      <h4 style="color: var(--dark);">5. Policy Updates</h4>
+      <p>We may update this privacy policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+
+      <h4 style="color: var(--dark);">6. Contact Us</h4>
+      <p>If you have questions about our privacy practices, please contact us using the support form.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-modal btn-modal-cancel" onclick="closeModal('privacyModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Load user profile on page load
+  document.addEventListener('DOMContentLoaded', async () => {
+    loadUserProfile();
+    initializeDarkMode();
+    setupNavigation();
+  });
+
+  // Load user profile from API or localStorage
+  async function loadUserProfile() {
+    try {
+      if (isLoggedIn()) {
+        const user = getUserData();
+        if (user && user.name) {
+          document.getElementById('currentName').textContent = user.name;
+          document.getElementById('profileName').value = user.name;
+        }
+      }
+    } catch (error) {
+      console.log('Could not load profile:', error);
+    }
+  }
+
+  // Modal Functions
+  function openEditProfileModal() {
+    document.getElementById('editProfileModal').classList.add('open');
+  }
+
+  function openChangePasswordModal() {
+    document.getElementById('changePasswordModal').classList.add('open');
+  }
+
+  function openDeleteAccountModal() {
+    document.getElementById('deleteAccountModal').classList.add('open');
+  }
+
+  function openClearCacheModal() {
+    document.getElementById('clearCacheModal').classList.add('open');
+  }
+
+  function openFeedbackModal() {
+    document.getElementById('feedbackModal').classList.add('open');
+  }
+
+  function openTermsModal() {
+    document.getElementById('termsModal').classList.add('open');
+  }
+
+  function openPrivacyModal() {
+    document.getElementById('privacyModal').classList.add('open');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.remove('open');
+  }
+
+  // Save profile
+  function saveProfile() {
+    const name = document.getElementById('profileName').value.trim();
+    
+    if (!name) {
+      alert('Please enter a name');
+      return;
+    }
+
+    const userData = getUserData();
+    userData.name = name;
+    localStorage.setItem('user', JSON.stringify(userData));
+    document.getElementById('currentName').textContent = name;
+    closeModal('editProfileModal');
+    showToast('Profile updated successfully', 'success');
+  }
+
+  // Save password
+  function savePassword() {
+    const currentPassword = document.getElementById('currentPassword').value;
+    const newPassword = document.getElementById('newPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      alert('New passwords do not match');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      alert('Password must be at least 6 characters');
+      return;
+    }
+
+    closeModal('changePasswordModal');
+    showToast('Password changed successfully', 'success');
+    
+    document.getElementById('currentPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+  }
+
+  // Delete account
+  function deleteAccount() {
+    const confirmText = document.getElementById('deleteConfirm').value;
+
+    if (confirmText !== 'DELETE') {
+      alert('Please type "DELETE" to confirm');
+      return;
+    }
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('cart');
+    
+    closeModal('deleteAccountModal');
+    showToast('Account deleted. Redirecting...', 'success');
+    
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 2000);
+  }
+
+  // Clear cache
+  function clearCache() {
+    localStorage.removeItem('bookCache');
+    localStorage.removeItem('authorCache');
+    localStorage.removeItem('tempData');
+    
+    closeModal('clearCacheModal');
+    showToast('Cache cleared successfully', 'success');
+  }
+
+  // Submit feedback
+  function submitFeedback() {
+    const subject = document.getElementById('feedbackSubject').value.trim();
+    const message = document.getElementById('feedbackMessage').value.trim();
+
+    if (!subject || !message) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    closeModal('feedbackModal');
+    showToast('Feedback submitted. Thank you!', 'success');
+    
+    document.getElementById('feedbackSubject').value = '';
+    document.getElementById('feedbackMessage').value = '';
+  }
+
+  // Dark mode toggle (persists app-wide via js/theme.js)
+  function toggleDarkMode() {
+    const toggle = document.getElementById('darkModeToggle');
+    toggle.classList.toggle('active');
+    const isDark = toggle.classList.contains('active');
+    if (typeof setLibraryMallDarkMode === 'function') {
+      setLibraryMallDarkMode(isDark);
+    }
+  }
+
+  function initializeDarkMode() {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    const toggle = document.getElementById('darkModeToggle');
+    if (toggle) toggle.classList.toggle('active', darkMode);
+  }
+
+  // Logout
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = 'login.html';
+    }
+  }
+
+  // Sidebar navigation
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      const href = item.getAttribute('href');
+      if (href && href !== '#') {
+        window.location.href = href;
+      }
+      
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  // Helper function to get user data
+  function getUserData() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : { name: 'User', email: 'user@example.com' };
+  }
+
+  // Setup navigation
+  function setupNavigation() {
+    // Ensure Settings is active
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.remove('active');
+    });
+    document.querySelector('[href="settings.html"]').classList.add('active');
+  }
+</script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/books.js"></script>
+<script src="js/orders.js"></script>
+</body>
+</html>

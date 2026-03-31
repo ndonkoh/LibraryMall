@@ -6,6 +6,7 @@
   <title>Admin Dashboard – Library Management</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="admin-dashboard.css"/>
+  <script src="js/theme.js"></script>
 </head>
 <body>
 
@@ -43,92 +44,255 @@
   <!-- MAIN CONTENT -->
   <main>
 
-    <!-- Header -->
-    <div class="section-header">
-      <div>
-        <h2>Admin Dashboard</h2>
-        <div class="subtitle">Welcome back — here's what's happening today.</div>
-      </div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="action-bar">
-      <button class="btn btn-primary">＋ Add Book</button>
-      <button class="btn btn-outline">✎ Edit</button>
-      <button class="btn btn-danger">🗑 Delete</button>
-    </div>
-
-    <!-- Stat Cards -->
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="icon">📚</div>
-        <div class="label">Total Books</div>
-        <div class="value">1550</div>
-      </div>
-      <div class="stat-card">
-        <div class="icon">👥</div>
-        <div class="label">Active Borrowers</div>
-        <div class="value">250</div>
-      </div>
-      <div class="stat-card">
-        <div class="icon">📖</div>
-        <div class="label">Books Loaned</div>
-        <div class="value">120</div>
-      </div>
-      <div class="stat-card">
-        <div class="icon">⚠️</div>
-        <div class="label">Overdue Books</div>
-        <div class="value">11</div>
-      </div>
-    </div>
-
-    <!-- Two-column lower sections -->
-    <div class="dashboard-grid">
-
-      <!-- Most Borrowed Books -->
-      <div class="section-card">
-        <h3>Most Borrowed Books</h3>
-        <div class="books-row">
-          <div class="book-thumb b1"><span class="spine-text">The Great Gatsby</span></div>
-          <div class="book-thumb b2"><span class="spine-text">Rising</span></div>
-          <div class="book-thumb b3"><span class="spine-text">The Will &amp; The Way</span></div>
-          <div class="book-thumb b4"><span class="spine-text">Rich Dad Poor Dad</span></div>
-          <div class="book-thumb b5"><span class="spine-text">Atomic Habits</span></div>
+    <!-- Dashboard Section -->
+    <div id="dashboardSection" class="admin-section active">
+      <!-- Header -->
+      <div class="section-header">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <div class="subtitle">Welcome back — here's what's happening today.</div>
         </div>
       </div>
 
-      <!-- Borrow Management -->
-      <div class="section-card">
-        <h3>Borrow Management</h3>
-        <div class="tab-row">
-          <button class="tab active">Borrowers</button>
-          <button class="tab">Loan History</button>
-          <button class="tab">Overdue</button>
+      <!-- Stat Cards -->
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+          <div class="icon">📚</div>
+          <div class="label">Total Books</div>
+          <div class="value">0</div>
         </div>
+        <div class="stat-card">
+          <div class="icon">✓</div>
+          <div class="label">Available</div>
+          <div class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="icon">💰</div>
+          <div class="label">Revenue</div>
+          <div class="value">$0</div>
+        </div>
+        <div class="stat-card">
+          <div class="icon">📋</div>
+          <div class="label">Pending</div>
+          <div class="value">0</div>
+        </div>
+      </div>
 
-        <div class="borrower-card">
-          <div class="avatar">L</div>
-          <div class="borrower-info">
-            <div class="name">Dr. Linda Banning</div>
-            <div class="email">linda.banning@mail.com</div>
-            <div class="meta">Books Borrowed: <span>5</span></div>
-            <div class="meta">Due Date: <span>April 29, 2026</span></div>
+      <!-- Two-column lower sections -->
+      <div class="dashboard-grid">
+        <!-- Most Borrowed Books -->
+        <div class="section-card">
+          <h3>Most Borrowed Books</h3>
+          <div class="books-row" id="mostBorrowedBooks">
+            <!-- Books will be loaded dynamically -->
           </div>
-          <button class="view-btn">View ›</button>
         </div>
 
-        <div class="borrower-card">
-          <div class="avatar" style="background: var(--green-mid);">K</div>
-          <div class="borrower-info">
-            <div class="name">Kwame Asante</div>
-            <div class="email">k.asante@mail.com</div>
-            <div class="meta">Books Borrowed: <span>3</span></div>
-            <div class="meta">Due Date: <span>May 4, 2026</span></div>
+        <!-- Borrow Management -->
+        <div class="section-card">
+          <h3>Borrow Management</h3>
+          <div class="tab-row">
+            <button class="tab active">Borrowers</button>
+            <button class="tab">Loan History</button>
+            <button class="tab">Overdue</button>
           </div>
-          <button class="view-btn">View ›</button>
+
+          <div id="borrowersList">
+            <!-- Borrowers will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Books Section -->
+    <div id="booksSection" class="admin-section" style="display: none;">
+      <div class="section-header">
+        <div>
+          <h2>Books Management</h2>
+          <div class="subtitle">Add, edit, and manage your book inventory.</div>
         </div>
       </div>
 
+      <!-- Action Buttons -->
+      <div class="action-bar">
+        <button class="btn btn-primary" onclick="showAddBookForm()">＋ Add Book</button>
+        <button class="btn btn-outline">✎ Edit</button>
+        <button class="btn btn-danger">🗑 Delete</button>
+      </div>
+
+      <!-- Add Book Form (hidden by default) -->
+      <div id="addBookForm" class="section-card" style="display: none; margin-top: 20px;">
+        <h3>Add New Book</h3>
+        <form id="newBookForm" onsubmit="addNewBook(event)">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="text" name="bookname" placeholder="Book Name" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="number" name="price" placeholder="Price" step="0.01" required>
+            <select name="category" required>
+              <option value="">Select Category</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="scifi">Sci-Fi</option>
+              <option value="self_help">Self-Help</option>
+              <option value="business">Business</option>
+              <option value="romance">Romance</option>
+              <option value="history">History</option>
+              <option value="mystery">Mystery</option>
+            </select>
+            <input type="number" name="quantity" placeholder="Quantity" min="0">
+            <div></div>
+          </div>
+          <div style="margin-top: 15px; display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-primary">Add Book</button>
+            <button type="button" class="btn btn-outline" onclick="hideAddBookForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Edit Book Form (hidden by default) -->
+      <div id="editBookForm" class="section-card" style="display: none; margin-top: 20px;">
+        <h3>Edit Book</h3>
+        <form id="updateBookForm" onsubmit="updateBook(event)">
+          <input type="hidden" name="bookId" id="editBookId">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="text" name="bookname" id="editBookName" placeholder="Book Name" required>
+            <input type="text" name="author" id="editBookAuthor" placeholder="Author" required>
+            <input type="number" name="price" id="editBookPrice" placeholder="Price" step="0.01" required>
+            <select name="category" id="editBookCategory" required>
+              <option value="">Select Category</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="scifi">Sci-Fi</option>
+              <option value="self_help">Self-Help</option>
+              <option value="business">Business</option>
+              <option value="romance">Romance</option>
+              <option value="history">History</option>
+              <option value="mystery">Mystery</option>
+            </select>
+            <input type="number" name="quantity" id="editBookQuantity" placeholder="Quantity" min="0">
+            <div></div>
+          </div>
+          <div style="margin-top: 15px; display: flex; gap: 10px;">
+            <button type="submit" class="btn btn-primary">Update Book</button>
+            <button type="button" class="btn btn-outline" onclick="hideEditBookForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Books Table -->
+      <div class="section-card" style="margin-top: 20px;">
+        <h3>All Books</h3>
+        <div class="books-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="booksTableBody">
+              <!-- Books will be loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Borrowers Section -->
+    <div id="borrowersSection" class="admin-section" style="display: none;">
+      <div class="section-header">
+        <div>
+          <h2>Borrowers Management</h2>
+          <div class="subtitle">View and manage user borrowing activity.</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>Active Borrowers</h3>
+        <div id="allBorrowersList">
+          <!-- Borrowers will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Loan History Section -->
+    <div id="loanHistorySection" class="admin-section" style="display: none;">
+      <div class="section-header">
+        <div>
+          <h2>Loan History</h2>
+          <div class="subtitle">View all loan transactions and history.</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>All Loans</h3>
+        <div id="loanHistoryList">
+          <!-- Loan history will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Overdue Section -->
+    <div id="overdueSection" class="admin-section" style="display: none;">
+      <div class="section-header">
+        <div>
+          <h2>Overdue Books</h2>
+          <div class="subtitle">Manage overdue returns and send notifications.</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>Overdue Items</h3>
+        <div id="overdueList">
+          <!-- Overdue items will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Reports Section -->
+    <div id="reportsSection" class="admin-section" style="display: none;">
+      <div class="section-header">
+        <div>
+          <h2>Reports & Analytics</h2>
+          <div class="subtitle">View detailed reports and analytics.</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="section-card">
+          <h3>Popular Categories</h3>
+          <div id="categoryStats">
+            <!-- Category statistics will be loaded dynamically -->
+          </div>
+        </div>
+
+        <div class="section-card">
+          <h3>Author Statistics</h3>
+          <div id="authorStats">
+            <!-- Author statistics will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div id="settingsSection" class="admin-section" style="display: none;">
+      <div class="section-header">
+        <div>
+          <h2>Settings</h2>
+          <div class="subtitle">Configure system settings and preferences.</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>System Settings</h3>
+        <div style="padding: 20px;">
+          <p>Settings functionality coming soon...</p>
+        </div>
+      </div>
     </div>
 
     <!-- Search -->
@@ -145,6 +309,7 @@
 
   </main>
 </div>
-
-</body>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script></body>
 </html>
